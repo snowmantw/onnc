@@ -47,6 +47,7 @@ ONNC_SOURCES = \
 	IR/Compute/Initializer.cpp \
 	IR/Compute/InputOperator.cpp \
 	IR/Compute/OutputOperator.cpp \
+	IR/Compute/Profile.cpp \
 	IR/Tensor/InitializerProxy.cpp \
 	Transforms/DeadNodeElimination.cpp \
 	Transforms/RemoveTrainingNodes.cpp \
