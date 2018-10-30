@@ -17,7 +17,6 @@ using namespace onnc;
 //===----------------------------------------------------------------------===//
 AboutData::AboutData(const std::string& pAppName,
                      const std::string& pProgName,
-                     const std::string& pVersion,
                      enum AboutLicense::Key pLicenseType,
                      const std::string& pShortDescription,
                      const std::string& pCopyrightStatement,
@@ -25,7 +24,6 @@ AboutData::AboutData(const std::string& pAppName,
                      const std::string& pBugsEmailAddress)
   : m_AppName(pAppName),
     m_ProgName(pProgName),
-    m_Version(pVersion),
     m_ShortDesc(pShortDescription),
     m_CopyRight(pCopyrightStatement),
     m_HomePageAddress(pHomePageAddress),
@@ -58,7 +56,7 @@ void AboutData::print(std::ostream& pOS, bool pAdvanced) const
   pOS << std::endl;
 
   pOS << "COPYRIGHT" << std::endl;
-  pOS << "\t" << m_AppName << " version " << m_Version << std::endl;
+  pOS << "\t" << m_AppName << " version " << PACKAGE_VERSION << std::endl;
   pOS << "\t" << m_HomePageAddress << std::endl;
 
   if (pAdvanced) {

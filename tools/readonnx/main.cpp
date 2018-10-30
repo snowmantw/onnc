@@ -16,7 +16,6 @@ using namespace onnc;
 
 static AboutData g_About("readonnx",
                          "readonnx",
-                         "0.1.0",
                          AboutLicense::kPrivate,
                          "onnx reader");
 
@@ -34,6 +33,11 @@ static cl::opt<bool> OptHelp("help", cl::kLong, cl::kOptional,
     cl::desc("Show this manual."),
     cl::about(g_About));
 
+static cl::opt<bool> OptVersion("version", cl::kLong, cl::kOptional,
+    cl::kValueDisallowed, cl::init(false),
+    cl::desc("Show the version string."),
+    cl::about(g_About));
+
 static cl::alias HelpAliasH("h", cl::kShort, cl::trueopt(OptHelp));
 static cl::alias HelpAliasQ("?", cl::kShort, cl::trueopt(OptHelp));
 
@@ -47,6 +51,12 @@ int main(int pArgc, char* pArgv[])
   // --help
   if (OptHelp) {
     g_About.print(outs());
+    return EXIT_SUCCESS;
+  }
+
+  // --version
+  if (OptVersion) {
+    outs() << g_About.version() << "\n";
     return EXIT_SUCCESS;
   }
 

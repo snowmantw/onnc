@@ -7,7 +7,12 @@
 //===----------------------------------------------------------------------===//
 #ifndef ONNC_CONFIG_ABOUT_DATA_H
 #define ONNC_CONFIG_ABOUT_DATA_H
+
+// CMake will read the target build version from file VERSION
+//#define ONNC_BUILD_VERSION @PACKAGE_VERSION@
+
 #include <onnc/Config/AboutLicense.h>
+#include <onnc/Config/Config.h>
 #include <onnc/Support/Path.h>
 #include <onnc/Option/OptDefs.h>
 #include <ostream>
@@ -24,7 +29,6 @@ class AboutData
 public:
   AboutData(const std::string& pAppName,
                const std::string& pProgramName,
-               const std::string& pVersion,
                AboutLicense::Key pLicenseType = AboutLicense::kPrivate,
                const std::string& pShortDescription = std::string(),
                const std::string& pCopyrightStatement = "Copyright (C), The ONNC Team. All rights reserved.",
@@ -37,7 +41,7 @@ public:
 
   const std::string& programName() const { return m_ProgName; }
 
-  const std::string& version() const { return m_Version; }
+  const std::string& version() const { return PACKAGE_VERSION; }
 
   AboutData& setLicenseType(AboutLicense::Key pType);
 

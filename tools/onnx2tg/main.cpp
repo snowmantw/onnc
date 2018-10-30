@@ -36,7 +36,7 @@
 using namespace onnc;
 
 static AboutData
-    g_About("onnx2tg", "onnc2tg", "0.1.0", AboutLicense::kPrivate,
+    g_About("onnx2tg", "onnc2tg", AboutLicense::kPrivate,
             "The onnx2tg command compiles ONNX models into "
             "assembly(.s), weight(.weight.bin) and runtime files(.rt.json)");
 
@@ -80,6 +80,11 @@ static cl::opt<bool> OptHelp("help", cl::kLong, cl::kOptional,
                              cl::kValueDisallowed, cl::init(false),
                              cl::desc("Show this manual."), cl::about(g_About));
 
+static cl::opt<bool> OptVersion("version", cl::kLong, cl::kOptional,
+    cl::kValueDisallowed, cl::init(false),
+    cl::desc("Show the version string."),
+    cl::about(g_About));
+
 static cl::alias HelpAliasH("h", cl::kShort, cl::trueopt(OptHelp),
                             cl::about(g_About));
 static cl::alias HelpAliasQ("?", cl::kShort, cl::trueopt(OptHelp),
@@ -101,6 +106,12 @@ int main(int pArgc, char *pArgv[])
   if (OptHelp) {
     g_About.print(std::cout, true);
     exit(0);
+  }
+
+  // --version
+  if (OptVersion) {
+    outs() << g_About.version() << "\n";
+    return EXIT_SUCCESS;
   }
 
   onnx2tg.options().setInput(InputFilename);

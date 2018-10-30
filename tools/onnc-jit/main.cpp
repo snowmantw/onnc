@@ -16,7 +16,6 @@ using namespace onnc;
 
 static AboutData g_About("onnc-jit",
                          "onnc-jit",
-                         "0.1.0",
                          AboutLicense::kPrivate,
                          "ONNC-JIT is the just-in-time interpreter of ONNC");
 
@@ -32,6 +31,11 @@ static cl::opt<std::string> OptOutput("o", cl::kShort, cl::kOptional,
 static cl::opt<bool> OptHelp("help", cl::kLong, cl::kOptional,
     cl::kValueDisallowed, cl::init(false),
     cl::desc("Show this manual."),
+    cl::about(g_About));
+
+static cl::opt<bool> OptVersion("version", cl::kLong, cl::kOptional,
+    cl::kValueDisallowed, cl::init(false),
+    cl::desc("Show the version string."),
     cl::about(g_About));
 
 static cl::alias HelpAliasH("h", cl::kShort, cl::trueopt(OptHelp));
@@ -86,6 +90,12 @@ int main(int pArgc, char* pArgv[])
   // --help
   if (OptHelp) {
     g_About.print(outs(), ONNCJITConfig::kNormal < jit.options().verbose());
+    return EXIT_SUCCESS;
+  }
+
+  // --version
+  if (OptVersion) {
+    outs() << g_About.version() << "\n";
     return EXIT_SUCCESS;
   }
 
